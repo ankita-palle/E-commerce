@@ -1,0 +1,112 @@
+# User
+# Product
+order
+address
+# cart_item
+categories
+# CART
+Review
+Order Item
+
+# users
+#   first_name
+#   last_name
+#   phone number
+#   email
+#   gender
+#   password
+#   password_confirmation
+
+# products
+#   name
+#   price
+#   DESCRIPTION # ACTION TEXT
+#   category_id
+#   status
+#   images # active storage # don't add 
+
+# carts
+#   user_id
+#   total
+
+orders
+  user_id
+  total
+
+order_item
+  order_id
+  total
+  quantity
+
+categories
+  name
+  description
+
+# cart_item
+#   cart_id
+#   quantity
+#   product_id
+#   total
+
+Review
+ rating
+ body
+
+address
+  street
+  city
+  state
+  zip
+  country
+
+
+
+class User
+  # User has_many :products
+end
+
+class Product
+  # belongs_to :user
+  # has_many :orders
+  # belongs_to :categorie
+end
+
+class Order
+  # belongs_to :product
+end
+
+class Categories
+  has_many :products
+end
+
+class cart_item
+end
+
+rails new ecom --js=esbuild --css=bootstrap
+
+
+
+Product
+  has_many :variants
+
+categories
+sub_categories
+
+User
+  has_many :addresses
+
+Order
+  total
+  has_one :shipping_detail
+  has_one :payment_detail
+
+ShippingDetail
+  addresses_id
+  order_id
+
+PaymentDetail
+  mode: ['card', 'cod']
+  order_id
+  status:
+
+

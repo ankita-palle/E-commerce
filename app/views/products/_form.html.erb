@@ -1,0 +1,35 @@
+<%= form_with model: @product do |form| %>
+  <p>
+    <%= form.label :name %><br>
+    <%= form.text_field :name %>
+    <% @product.errors.full_messages_for(:name).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </p>
+
+  <p>
+    <%= form.label :price %><br>
+    <%= form.text_field :price %>
+    <% @product.errors.full_messages_for(:price).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </p>
+
+  <p>
+    <%= form.label :description %><br>
+    <%= form.rich_text_area :description %>
+  </p>
+
+  <p>
+    <%= form.label :status %><br>
+    <%= select_tag :status, options_for_select(Product.statuses.map {|k, v| [k.humanize.capitalize, v]}) %>
+  </p>
+
+  <p>
+    <%= form.file_field :images, multiple: true %><br>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>

@@ -1,0 +1,17 @@
+<% if @orders.present? %>
+  <h1>Order placed successfully</h1>
+  <%@orders.each do |order|%>
+    <div class="row row-cols-1 row-cols-md-3 g-4 my-3">
+      <div class = "col-6">
+        <p>
+          <strong>Total:</strong>
+          <%= order.total %>
+        </p><br>
+      </div>
+    </div>
+      <p><%= link_to 'Show order', order_path(order.id) %></p>
+      <p><%= button_to 'Cancle order', order_path(order), method: :delete, data: { method: :delete, confirm: "are you sure, want to cancel order", turbo: false } %></p>
+  <%end%>
+<% else %>
+  <h1>Order cancelled successfully</h1>
+<% end %>

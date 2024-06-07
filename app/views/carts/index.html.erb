@@ -1,0 +1,43 @@
+<h1>Listing items</h1>
+
+<div class="row row-cols-1 row-cols-md-3 g-4 my-3">
+  <div class = "col-6">
+  <p>
+    <% @items.each do |item| %>
+      <p>
+      <div class = "col-6">
+        <p>
+          <strong></strong>
+          <% item.product.images.each do |img| %>
+            <%= image_tag (url_for(img)), style: 'height:75%;width:75%;'%>
+          <% end %>
+        </p>
+      </div>
+        <strong>Name:</strong>
+        <%=  item.product.name %>
+      </p>
+      <p>
+        <strong>Price:</strong>
+        <%= item.product.price %>
+      </p>
+      <p>
+        <strong>Description:</strong>
+        <%= item.product.description %>
+      </p>
+      <p>
+        <strong>Status:</strong>
+        <%= item.product.status %>
+      </p>
+      <p>
+        <strong>Quantity:</strong>
+        <%= item.quantity %>
+      </p>
+      <p>
+        <strong>Total:</strong>
+        <%= item.total %>
+      </p>
+      <p><%= link_to 'Order item', order_create_path(id: item.id) %></p>
+      <p><%= link_to 'Show product', cart_item_path(item.id) %></p>
+    <% end %>
+  </div>
+</div>
