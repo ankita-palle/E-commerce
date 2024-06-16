@@ -1,7 +1,26 @@
-<%= render "nav_bar" %>
+<%= render 'products/nav_bar' %>
 
-<% if @orders.present? %>
-  <h1>Order placed successfully</h1>
+<h1>Total Orders</h1>
+<%if current_user.has_role? :admin %>
+  <div class="row mt-2">
+    <% @all_orders.each do |order| %>
+      <div class="col-4 card p-3 m-2">
+        <h5>Customer name:  <%=order.user.first_name%><%=order.user.last_name%></h5>
+        <h5>Customer email: <%=order.user.email%></h5>
+        <h5>Product name: Flower </h5>
+        <h5>Product price: 100 </h5>
+        <h5>Order total price: <%=order.total%></h5>
+      </div>
+      <div class="col-4 card p-3 m-2">
+        <h5>Customer name: Aditi dubey</h5>
+        <h5>Customer email: aditi@gmail.com</h5>
+        <h5>Product name: Sweet food </h5>
+        <h5>Product price: 2000 </h5>
+        <h5>Order total price: 2000</h5>
+      </div>
+    <%end%>
+  </div>
+<%else%>
   <%@orders.each do |order|%>
     <div class="row row-cols-1 row-cols-md-3 g-4 my-3">
       <div class = "col-6">
@@ -14,6 +33,4 @@
       <p><%= link_to 'Show order', order_path(order.id) %></p>
       <p><%= button_to 'Cancle order', order_path(order), method: :delete, data: { method: :delete, confirm: "are you sure, want to cancel order", turbo: false } %></p>
   <%end%>
-<% else %>
-  <h1>Order cancelled successfully</h1>
-<% end %>
+<%end%>

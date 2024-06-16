@@ -5,6 +5,7 @@ class OrdersController < ApplicationController
 
   def index
     @orders = current_user.orders
+    @all_orders = Order.all
   end
 
   def new
