@@ -1,0 +1,29 @@
+<%= render 'products/nav_bar' %>
+
+<h2 class="text-center"> Your Cart Items </h2>
+
+<% @cart_items.each do |cart_item| %>
+  <div class="row row-cols-1 row-cols-md-3 g-4 my-3">
+    <div class = "col-6">
+      <p>
+        <strong>Total:</strong>
+        <%= cart_item.total %>
+      </p><br>
+      <p>
+        <strong>Quantity:</strong>
+        <%= cart_item.quantity %>
+      </p>
+      <%if current_user.has_role? :admin %>
+        <p><%= button_to 'Destroy', cart_item_path(cart_item.id), method: :delete, data: { method: :delete, confirm: "are you sure, want to delete this product?", turbo: false } %></p>
+      <%end%>
+    </div>
+    <div class = "col-6">
+      <p>
+        <strong>Image:</strong>
+        <% cart_item.product.images.each do |img| %>
+          <%= image_tag (url_for(img)), style: 'height:100%;width:100%;'%>
+      <% end %>
+      </p>
+    </div>
+  </div>
+<% end %>

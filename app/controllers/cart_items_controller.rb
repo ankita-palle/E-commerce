@@ -4,6 +4,10 @@ class CartItemsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_cart
 
+  def index
+    @cart_items = CartItem.all
+  end
+
   def show
     @cart_item = @cart.cart_items.find(params[:id])
   end
