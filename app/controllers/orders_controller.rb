@@ -5,6 +5,7 @@ class OrdersController < ApplicationController
 
   def index
     @orders = current_user.orders
+    @all_orders = Order.all
   end
 
   def new
@@ -17,11 +18,10 @@ class OrdersController < ApplicationController
 
   def create
     order = Order.create(user_id: current_user.id)
-    product = Product.find_by(id: params[:id])
-    if @cart_item.where(product_id: product.id).blank?
-      item = OrderItem.new(order_id: order.id)
+    if @cart_item.where(product_id: params[:product_id]).blank?
+      item = OrderItem.new(cart_item_id: @cart_item.last.id,order_id: order.id)
       quantity = item.quantity += 1
-      item.total = product.price * quantity
+      item.total = @cart_item.last.product.price * quantity
     else
       item = @cart_item.find(params[:id])
       order_item = order.order_items.where(cart_item_id: params[:id])&.first
